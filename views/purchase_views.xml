@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="purchase_form_view" model="ir.ui.view">
+            <field name="name">purchase.form.view</field>
+            <field name="model">purchase</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                            <group>
+                                <field name="employee_id" string ="Tên nhân viên"  />
+                                <field name="total_money" string="Tiền"/>
+                                <field name="purchase_date" string="Ngày"/>
+                                <field name="product_ids">
+                                    <form>
+                                        <group>
+                                    <field name="product" string="Sản phẩm"/>
+                                    <field name="quantity" string="Số lượng"/>
+                                    <field name="unit_price" string="Đơn giá"/>
+                                    <field name="product_money" string="Thành tiền"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="purchase_tree_view" model="ir.ui.view">
+            <field name="name">purchase.tree.view</field>
+            <field name="model">purchase</field>
+            <field name="arch" type="xml">
+                <tree string="Purchase" default_order="purchase_date desc">
+                    <field name="purchase_date"/>
+                    <field name="total_money"/>
+                    <field name="employee_id" string ="Tên nhân viên"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_purchase" model="ir.actions.act_window">
+            <field name="name">Chi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase</field>
+            <!-- <field name="view_type">form</field> --> <!-- Odoo 13 has removed this field -->
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('purchase_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('purchase_form_view')})]"/>
+
+        </record>
+        <menuitem id="menu_purchase"
+            name="Chi"
+            action="action_purchase"
+            sequence="10"
+                  parent="menu_root"
+            groups="base.group_user"/>
+    </data>
+</odoo>

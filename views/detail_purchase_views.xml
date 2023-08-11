@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="detail_purchase_form_view" model="ir.ui.view">
+            <field name="name">detail.purchase.form.view</field>
+            <field name="model">detail.purchase</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                            <group>
+                                <field name="product" string ="Sản phẩm"  />
+                                <field name="quantity" string="Số lượng"/>
+                                <field name="unit_price" string="Đơn giá"/>
+                                <field name="product_money" string="Tiền sản phẩm"/>
+                            </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="detail_purchase_tree_view" model="ir.ui.view">
+            <field name="name">detail.purchase.tree.view</field>
+            <field name="model">detail.purchase</field>
+            <field name="arch" type="xml">
+                <tree string="Detail purchase" default_order="create_date desc">
+                    <field name="product" string ="Sản phẩm"/>
+                    <field name="quantity" string =" Số lượng"/>
+                    <field name="unit_price" string ="Đơn giá"/>
+                    <field name="product_money" string="Thành tiền"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_detail_purchase" model="ir.actions.act_window">
+            <field name="name">Chi cho từng sản phẩm</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">detail.purchase</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('detail_purchase_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('detail_purchase_form_view')})]"/>
+        </record>
+
+        <menuitem id="menu_detail_purchase"
+            name="Sản phẩm"
+            action="action_detail_purchase"
+            sequence="10"
+                  parent="menu_root"
+            groups="base.group_user"/>
+
+    </data>
+</odoo>

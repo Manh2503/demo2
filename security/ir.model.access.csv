@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_revenue2,access_revenue2,model_revenue2,base.group_user,1,1,1,1
+access_purchase,access_purchase,model_purchase,base.group_user,1,1,1,1
+access_detail_purchase,access_detail_purchase,model_detail_purchase,base.group_user,1,1,1,1
+
